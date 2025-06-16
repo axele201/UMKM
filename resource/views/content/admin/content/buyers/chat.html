@@ -1,0 +1,41 @@
+<div class="container chat-container" data-aos="fade-up">
+    <div class="chat-box">
+        <div class="chat-header">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fa-solid fa-user-circle fa-2x text-primary"></i>
+                <div>
+                    <h5 class="mb-0">Budi Santoso</h5>
+                    <small class="text-muted">PT. ABC</small>
+                </div>
+            </div>
+            <button class="btn btn-outline-danger btn-sm" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i> Kembali
+            </button>
+        </div>
+
+        <div class="chat-body d-flex flex-column" id="chatBody">
+            <div class="message-bubble message-received">
+                Selamat pagi Admin, saya ingin menanyakan status order saya.
+            </div>
+
+            <div class="message-bubble message-sent">
+                Baik Pak, pesanan Bapak sudah diproses dan akan segera dikirim.
+            </div>
+
+            <div class="message-bubble message-received">
+                Baik, terima kasih ya Admin.
+            </div>
+
+            <!-- Pesan lainnya -->
+        </div>
+
+        <div class="chat-footer">
+            <div class="input-group">
+                <input type="text" id="messageInput" class="form-control" placeholder="Ketik pesan..." />
+                <button class="btn btn-primary" type="button" onclick="sendMessage()">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

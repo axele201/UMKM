@@ -1,0 +1,106 @@
+<div class="container-fluid py-4">
+    <h2 class="mb-4"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h2>
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card card-stat border-0 shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">Orders</h5>
+                        <h3>1,235</h3>
+                    </div>
+                    <i class="bi bi-bag-check fs-1 text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-stat border-0 shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">Revenue</h5>
+                        <h3>Rp 125jt</h3>
+                    </div>
+                    <i class="bi bi-cash-stack fs-1 text-success"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-stat border-0 shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">Products</h5>
+                        <h3>57</h3>
+                    </div>
+                    <i class="bi bi-box-seam fs-1 text-warning"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-stat border-0 shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">Buyers</h5>
+                        <h3>432</h3>
+                    </div>
+                    <i class="bi bi-people fs-1 text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Chart -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Sales Overview</h5>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="card-title">Recent Orders</h5>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#ORD123</td>
+                            <td>John Doe</td>
+                            <td>2025-06-15</td>
+                            <td>Rp 250.000</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD124</td>
+                            <td>Jane Smith</td>
+                            <td>2025-06-14</td>
+                            <td>Rp 150.000</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>#ORD125</td>
+                            <td>Michael</td>
+                            <td>2025-06-13</td>
+                            <td>Rp 400.000</td>
+                            <td><span class="badge bg-danger">Canceled</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

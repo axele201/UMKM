@@ -1,0 +1,119 @@
+<div class="container py-5" data-aos="fade-up">
+  
+  <!-- Header & Search -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-2 mb-4">
+    <h2 class="mb-0"><i class="fa-solid fa-boxes-stacked me-2"></i> Product</h2>
+    <input type="text" id="searchInput" class="form-control w-100 w-md-50 shadow-sm" placeholder="Cari nama produk...">
+    <div class="d-flex flex-column flex-md-row gap-2">
+      <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+        <i class="fas fa-plus"></i> Tambah Produk
+      </button>
+      <select id="filterKategori" class="form-select w-100 w-md-auto shadow-sm">
+        <option value="">Kategori</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Product Container -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="row g-4" id="produkContainer">
+        <!-- Produk List tampil disini -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination justify-content-center" id="paginationContainer"></ul>
+  </nav>
+
+</div>
+
+<!-- Modal Tambah Produk -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-sm">
+      <form name="submit-to-google-sheet-product" id="productForm">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="checkoutModalLabel"><i class="fas fa-file-invoice-dollar me-2"></i> Form Pembelian</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <input class="form-control" name="nama_product" type="text" placeholder="Nama Produk" required>
+          </div>
+          <div class="mb-3">
+            <input class="form-control" name="variant" type="text" placeholder="Varian Produk" required>
+          </div>
+          <div class="mb-3">
+            <label for="kategori" class="form-label">Kategori</label>
+            <select class="form-select" name="kategori" required>
+              <option value="">Pilih Kategori</option>
+              <option value="Minuman">Minuman</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Elektronik">Elektronik</option>
+              <option value="Alat Rumah Tangga">Alat Rumah Tangga</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <input class="form-control" name="harga" type="number" placeholder="Harga Produk" required>
+          </div>
+          <div class="mb-3">
+            <input class="form-control" name="gambar" type="file" accept=".jpg,.jpeg,.png,.pdf,.svg,.bmp,.psd,.ai" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary d-flex align-items-center gap-2" id="submitBtn">
+            <span class="btn-text">Submit</span>
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Produk -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content shadow-sm">
+      <form id="editForm">
+        <div class="modal-header bg-warning text-white">
+          <h5 class="modal-title" id="editModalLabel"><i class="fas fa-edit me-2"></i> Edit Produk</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editId">
+          <div class="mb-3">
+            <label>Nama Produk</label>
+            <input type="text" class="form-control" id="editNamaProduct" required>
+          </div>
+          <div class="mb-3">
+            <label>Varian</label>
+            <input type="text" class="form-control" id="editVariant" required>
+          </div>
+          <div class="mb-3">
+            <label for="editKategori" class="form-label">Kategori</label>
+            <select class="form-select" id="editKategori" required>
+              <option value="">Pilih Kategori</option>
+              <option value="Minuman">Minuman</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Elektronik">Elektronik</option>
+              <option value="Alat Rumah Tangga">Alat Rumah Tangga</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Harga</label>
+            <input type="number" class="form-control" id="editHarga" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

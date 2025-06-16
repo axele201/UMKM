@@ -1,0 +1,147 @@
+<div class="container">
+    <!-- Title -->
+    <h2 class="pending-orders-title mt-4 text-center" data-aos="fade-up" data-aos-duration="1000">Pending Orders</h2>
+
+    <!-- Pending Orders Table -->
+    <div class="pending-orders-table mt-5" data-aos="fade-up" data-aos-duration="1200">
+        <table class="table table-striped table-bordered table-hover shadow-sm rounded">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows -->
+                <tr class="hover-row">
+                    <td>1</td>
+                    <td>ORD00123</td>
+                    <td>Alex Brown</td>
+                    <td>Smartphone XYZ</td>
+                    <td>2025-06-15</td>
+                    <td>$500</td>
+                    <td class="action-btns">
+                        <button class="btn btn-success btn-sm rounded-pill" title="Approve">
+                            <i class="bi bi-check-lg"></i> Approve
+                        </button>
+                        <button class="btn btn-danger btn-sm rounded-pill" title="Reject">
+                            <i class="bi bi-x-lg"></i> Reject
+                        </button>
+                        <button class="btn btn-primary btn-sm rounded-pill print-invoice" 
+                            data-order-id="ORD00123" 
+                            data-customer="Alex Brown" 
+                            data-product="Smartphone XYZ" 
+                            data-date="2025-06-15" 
+                            data-amount="$500">
+                            <i class="bi bi-printer"></i> Cetak
+                        </button>
+                    </td>
+                </tr>
+                <tr class="hover-row">
+                    <td>2</td>
+                    <td>ORD00124</td>
+                    <td>Sarah White</td>
+                    <td>Wireless Headphones</td>
+                    <td>2025-06-14</td>
+                    <td>$150</td>
+                    <td class="action-btns">
+                        <button class="btn btn-success btn-sm rounded-pill" title="Approve">
+                            <i class="bi bi-check-lg"></i> Approve
+                        </button>
+                        <button class="btn btn-danger btn-sm rounded-pill" title="Reject">
+                            <i class="bi bi-x-lg"></i> Reject
+                        </button>
+                        <button class="btn btn-primary btn-sm rounded-pill print-invoice" 
+                            data-order-id="ORD00123" 
+                            data-customer="Alex Brown" 
+                            data-product="Smartphone XYZ" 
+                            data-date="2025-06-15" 
+                            data-amount="$500">
+                            <i class="bi bi-printer"></i> Cetak
+                        </button>
+                    </td>
+                </tr>
+                <tr class="hover-row">
+                    <td>3</td>
+                    <td>ORD00125</td>
+                    <td>Michael Green</td>
+                    <td>Smartwatch 5</td>
+                    <td>2025-06-13</td>
+                    <td>$250</td>
+                    <td class="action-btns">
+                        <button class="btn btn-success btn-sm rounded-pill" title="Approve">
+                            <i class="bi bi-check-lg"></i> Approve
+                        </button>
+                        <button class="btn btn-danger btn-sm rounded-pill" title="Reject">
+                            <i class="bi bi-x-lg"></i> Reject
+                        </button>
+                        <button class="btn btn-primary btn-sm rounded-pill print-invoice" 
+                            data-order-id="ORD00123" 
+                            data-customer="Alex Brown" 
+                            data-product="Smartphone XYZ" 
+                            data-date="2025-06-15" 
+                            data-amount="$500">
+                            <i class="bi bi-printer"></i> Cetak
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pending Orders Cards Section (Optional for alternate view) -->
+    <div class="pending-orders-card-container mt-5" data-aos="fade-up" data-aos-duration="1400">
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-light rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">ORD00123 - Smartphone XYZ</h5>
+                        <p><strong>Customer:</strong> Alex Brown</p>
+                        <p><strong>Order Date:</strong> 2025-06-15</p>
+                        <p><strong>Amount:</strong> $500</p>
+                        <div class="text-center">
+                            <button class="btn btn-success btn-sm rounded-pill">Approve</button>
+                            <button class="btn btn-danger btn-sm rounded-pill">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-light rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">ORD00124 - Wireless Headphones</h5>
+                        <p><strong>Customer:</strong> Sarah White</p>
+                        <p><strong>Order Date:</strong> 2025-06-14</p>
+                        <p><strong>Amount:</strong> $150</p>
+                        <div class="text-center">
+                            <button class="btn btn-success btn-sm rounded-pill">Approve</button>
+                            <button class="btn btn-danger btn-sm rounded-pill">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-light rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">ORD00125 - Smartwatch 5</h5>
+                        <p><strong>Customer:</strong> Michael Green</p>
+                        <p><strong>Order Date:</strong> 2025-06-13</p>
+                        <p><strong>Amount:</strong> $250</p>
+                        <div class="text-center">
+                            <button class="btn btn-success btn-sm rounded-pill">Approve</button>
+                            <button class="btn btn-danger btn-sm rounded-pill">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
