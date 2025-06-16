@@ -5,5 +5,19 @@ const animationReset = lottie.loadAnimation({
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: '/asset/animation/lottie/AnimationReset.json' // path animasi reset
+    path: '/asset/animation/lottie/AnimationReset.json'
+});
+
+document.getElementById("resetForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+
+    try {
+        await auth.sendPasswordResetEmail(email);
+        Swal.fire('Berhasil', 'Link reset password telah dikirim ke email Anda.', 'success')
+            .then(() => window.location.href = "?page=login");
+    } catch (error) {
+        Swal.fire('Gagal', error.message, 'error');
+    }
 });

@@ -1,10 +1,11 @@
+protectPage(['admin']);
+
 const session = JSON.parse(localStorage.getItem('auth'));
 
 if (!session || session.role !== 'admin') {
   window.location.href = "/index.html?page=login";
 }
 AOS.init();
-// ✅ Jam realtime
 function updateClock() {
   const now = new Date();
   const options = { timeZone: 'Asia/Jakarta', hour12: false };
@@ -14,7 +15,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ✅ Sidebar toggle (mobile)
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");

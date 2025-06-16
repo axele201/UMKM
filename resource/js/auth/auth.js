@@ -1,132 +1,165 @@
+// Import eksternal
+import AOS from "https://cdn.jsdelivr.net/npm/aos@2.3.4/+esm";
+import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm";
+
+// Import Firebase inits
+import { auth, db, googleProvider } from '/resource/js/firebase-init.js';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+import {
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+// Jalankan AOS
 AOS.init();
 
+// Routing halaman auth
 const authRoutes = {
-    'login': {
-        html: '/resource/views/auth/content/login.html',
-        script: '/resource/js/auth/script/login.js'
-    },
-    'register': {
-        html: '/resource/views/auth/content/register.html',
-        script: '/resource/js/auth/script/register.js'
-    },
-    'reset': {
-        html: '/resource/views/auth/content/resetPassword.html',
-        script: '/resource/js/auth/script/reset.js'
-    }
+  'login': {
+    html: '/resource/views/auth/content/login.html',
+    script: '/resource/js/auth/script/login.js'
+  },
+  'register': {
+    html: '/resource/views/auth/content/register.html',
+    script: '/resource/js/auth/script/register.js'
+  },
+  'reset': {
+    html: '/resource/views/auth/content/resetPassword.html',
+    script: '/resource/js/auth/script/reset.js'
+  }
 };
 
-const userDB = [
-    { username: 'admin', password: 'admin123', role: 'admin', token: null, tokenExpiry: null },
-    { username: 'user', password: 'user123', role: 'user', token: null, tokenExpiry: null }
-];
-
+// Load halaman auth
 function loadAuthPage(pageKey = 'login') {
-    const route = authRoutes[pageKey];
-    if (!route) {
-        console.error(`Page "${pageKey}" tidak ditemukan.`);
-        return;
-    }
+  const route = authRoutes[pageKey];
+  if (!route) {
+    console.error(`❌ Halaman "${pageKey}" tidak ditemukan`);
+    return;
+  }
 
-    $('#auth-container').load(route.html, function () {
-        $.getScript(route.script)
-            .done(() => console.log(`${pageKey} loaded`))
-            .fail(() => console.error(`Gagal load script ${route.script}`));
-    });
+  $('#auth-container').load(route.html, async function () {
+    try {
+      await import(route.script);
+      console.log(`✅ ${pageKey} module loaded`);
+    } catch (err) {
+      console.error(`❌ Gagal memuat modul ${route.script}`, err);
+    }
+  });
 }
 
-
+// ambil parameter dari URL
 function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
 }
 
-function generateToken() {
-    return 'token-' + Math.random().toString(36).substr(2) + Date.now();
+// Simpan session ke localStorage
+function saveSession(user, role) {
+  localStorage.setItem('auth', JSON.stringify({
+    email: user.email,
+    uid: user.uid,
+    role: role
+  }));
 }
 
-function saveSession(user) {
-    localStorage.setItem('auth', JSON.stringify(user));
-}
-
+// Ambil session
 function getSession() {
-    return JSON.parse(localStorage.getItem('auth'));
+  return JSON.parse(localStorage.getItem('auth'));
 }
 
+// Hapus session
 function clearSession() {
-    localStorage.removeItem('auth');
+  localStorage.removeItem('auth');
 }
 
-function login(username, password) {
-    const user = userDB.find(u => u.username === username && u.password === password);
-
-    if (!user) {
-        Swal.fire('Gagal', 'Username atau password salah!', 'error');
-        return;
-    }
-
-    const now = Date.now();
-
-    // Cek apakah user sudah login di device lain
-    if (user.token && user.tokenExpiry > now) {
-        Swal.fire('Gagal', 'Akun ini sedang login di device lain!', 'error');
-        return;
-    }
-
-    // Generate token
-    const token = generateToken();
-    user.token = token;
-    user.tokenExpiry = now + (60 * 60 * 1000); // 1 jam
-
-    saveSession({
-        username: user.username,
-        role: user.role,
-        token: user.token,
-        tokenExpiry: user.tokenExpiry
-    });
-
-    redirectUser(user.role);
+// Redirect user berdasarkan role
+function redirectUser(role) {
+  if (role === 'admin') {
+    window.location.href = "/resource/views/content/admin/index.html";
+  } else {
+    window.location.href = "/resource/views/content/user/index.html";
+  }
 }
 
-function logout() {
-    const session = getSession();
-    if (session) {
-        const user = userDB.find(u => u.username === session.username);
-        if (user) {
-            user.token = null;
-            user.tokenExpiry = null;
-        }
+// Ambil role user dari Firestore
+async function getUserRole(uid) {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+  return docSnap.exists() ? (docSnap.data().role || 'user') : 'user';
+}
+
+// Login manual (email/username + password)
+export async function login(identifier, password) {
+  try {
+    let emailToUse = identifier;
+    if (!identifier.includes('@')) {
+      const q = query(collection(db, "users"), where("username", "==", identifier));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) throw new Error("Username tidak ditemukan");
+      emailToUse = querySnapshot.docs[0].data().email;
     }
+
+    const userCredential = await signInWithEmailAndPassword(auth, emailToUse, password);
+    const user = userCredential.user;
+    const role = await getUserRole(user.uid);
+    saveSession(user, role);
+    redirectUser(role);
+
+  } catch (error) {
+    Swal.fire('Login Gagal', error.message, 'error');
+  }
+}
+export async function loginWithGoogle() {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(userRef);
+
+    if (!docSnap.exists()) {
+      await setDoc(userRef, {
+        username: user.displayName.toLowerCase().replace(/\s/g, ''),
+        email: user.email,
+        role: 'user',
+        createdAt: new Date()
+      });
+    }
+
+    const role = await getUserRole(user.uid);
+    saveSession(user, role);
+    redirectUser(role);
+
+  } catch (error) {
+    Swal.fire('Google Login Gagal', error.message, 'error');
+  }
+}
+export function logout() {
+  signOut(auth).then(() => {
     clearSession();
     window.location.href = "/index.html";
+  });
 }
-
-function redirectUser(role) {
-    if (role === 'admin') {
-        window.location.href = "/resource/views/content/admin/index.html";
-    } else if (role === 'user') {
-        window.location.href = "/resource/views/content/user/index.html";
+document.addEventListener("DOMContentLoaded", () => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const role = await getUserRole(user.uid);
+      saveSession(user, role);
+      redirectUser(role);
+    } else {
+      const page = getQueryParam('page') || 'login';
+      loadAuthPage(page);
     }
-}
-
-function checkTokenOnLoad() {
-    const session = getSession();
-    const now = Date.now();
-
-    if (session) {
-        if (session.tokenExpiry > now) {
-            redirectUser(session.role);
-        } else {
-            // Token expired
-            clearSession();
-            Swal.fire('Sesi Habis', 'Silahkan login kembali!', 'warning');
-        }
-    }
-}
-
-// Ketika page load, cek apakah sudah login
-$(document).ready(function () {
-    checkTokenOnLoad();
-
-    const page = getQueryParam('page') || 'login';
-    loadAuthPage(page);
+  });
 });
