@@ -1,3 +1,8 @@
+const session = JSON.parse(localStorage.getItem('auth'));
+
+if (!session || session.role !== 'admin') {
+  window.location.href = "/index.html?page=login";
+}
 AOS.init();
 // ✅ Jam realtime
 function updateClock() {
@@ -19,7 +24,7 @@ function toggleSidebar() {
 
 // (ROUTING SYSTEM)
 const routes = {
-    '/resource/views/content/admin/content/dashboard.html': {
+  '/resource/views/content/admin/content/dashboard.html': {
     script: '/resource/js/content/admin/script/dashboard.js',
     callback: 'loadProductData'
   },

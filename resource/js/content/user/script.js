@@ -1,3 +1,8 @@
+const session = JSON.parse(localStorage.getItem('auth'));
+
+if (!session || session.role !== 'user') {
+  window.location.href = "/index.html?page=login";
+}
 AOS.init();
 // ROUTING SYSTEM
 const routes = {
