@@ -1,9 +1,21 @@
 AOS.init();
 // ROUTING SYSTEM
 const routes = {
-  '/resource/views/content/user/content/akun.html': {
-    script: '/resource/js/content/user/script/akun.js',
-    callback: 'loadProfieData'
+  '/resource/views/content/user/content/home.html': {
+    script: '/resource/js/content/user/script/home.js',
+    callback: 'loadHomeData'
+  },
+  '/resource/views/content/user/content/product.html': {
+    script: '/resource/js/content/user/script/product.js',
+    callback: 'loadProductData'
+  },
+  '/resource/views/content/user/content/pemesanan.html': {
+    script: '/resource/js/content/user/script/pemesanan.js',
+    callback: 'loadProductData'
+  },
+  '/resource/views/content/user/content/pusatPengajuan.html': {
+    script: '/resource/js/content/user/script/pengajuan.js',
+    callback: 'loadProductData'
   },
   '/resource/views/content/user/content/akun.html': {
     script: '/resource/js/content/user/script/akun.js',

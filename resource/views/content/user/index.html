@@ -27,13 +27,13 @@
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="#"><i class="bi bi-app-indicator me-2"></i>DApps</a>
             <div class="d-flex align-items-center ms-auto gap-4">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" onclick="loadPage('/resource/views/content/user/content/home.html', 'Home')">
                     <i class="bi bi-house-door me-1"></i>Home</a>
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" onclick="loadPage('/resource/views/content/user/content/product.html', 'Product')">
                     <i class="bi bi-box-seam me-1"></i>Product</a>
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" onclick="loadPage('/resource/views/content/user/content/pemesanan.html', 'Pemesanan')">
                     <i class="bi bi-cart-check me-1"></i>Pemesanan</a>
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" onclick="loadPage('/resource/views/content/user/content/pusatPengajuan.html', 'pusatPengajuan')">
                     <i class="bi bi-file-earmark-text me-1"></i>Pengajuan</a>
 
                 <div class="dropdown">
@@ -62,10 +62,18 @@
     <!-- Mobile Bottom Navbar -->
     <div class="bottom-navbar d-md-none">
         <div class="d-flex justify-content-around">
-            <a href="#"><i class="bi bi-house-door fs-4"></i></a>
-            <a href="#"><i class="bi bi-box-seam fs-4"></i></a>
-            <a href="#"><i class="bi bi-cart-check fs-4"></i></a>
-            <a href="#"><i class="bi bi-file-earmark-text fs-4"></i></a>
+            <a href="#">
+                <i class="bi bi-house-door fs-4"
+                    onclick="loadPage('/resource/views/content/user/content/home.html', 'Home')"></i></a>
+            <a href="#">
+                <i class="bi bi-box-seam fs-4"
+                    onclick="loadPage('/resource/views/content/user/content/product.html', 'Product')"></i></a>
+            <a href="#">
+                <i class="bi bi-cart-check fs-4"
+                    onclick="loadPage('/resource/views/content/user/content/pemesanan.html', 'Pemesanan')"></i></a>
+            <a href="#">
+                <i class="bi bi-file-earmark-text fs-4"
+                    onclick="loadPage('/resource/views/content/user/content/pusatPengajuan.html', 'pusatPengajuan')"></i></a>
             <a href="#">
                 <i class="bi bi-person-circle fs-4"
                     onclick="loadPage('/resource/views/content/user/content/akun.html', 'Akun')"></i></a>

@@ -5,5 +5,5 @@ const animation = lottie.loadAnimation({
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: '/asset/animation/lottie/AnimationLogin1.json'
+    path: '/asset/animation/lottie/AnimationLogin.json'
 });
